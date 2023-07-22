@@ -1,0 +1,28 @@
+﻿services:
+  mssql-foundation:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
+    container_name: mssql-foundation
+    ports:
+      - 1433:1433
+    env_file:
+      - env-var.env
+    networks:
+      - net-amrita
+    volumes:
+      - vol-mssql-data:/var/opt/mssql/data
+      - vol-mssql-log:/var/opt/mssql/log
+      - vol-mssql-secrets:/var/opt/mssql/secrets
+
+networks:
+  net-amrita:
+    external: true
+    name: net-amrita
+
+volumes:
+  vol-mssql-data:
+    name: vol-mssql-data
+  vol-mssql-log:
+    name: vol-mssql-log
+  vol-mssql-secrets:
+    name: vol-mssql-secrets
